@@ -1,0 +1,31 @@
+{
+  "name": "nav",
+  "version": "0.1.0",
+  "description": "react-based nav",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:egauci/react-nav.git"
+  },
+  "author": "Ed G",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/egauci/react-nav/issues"
+  },
+  "homepage": "https://github.com/egauci/react-nav",
+  "jspm": {
+    "directories": {
+      "lib": "lib",
+      "packages": "jspm_packages"
+    },
+    "dependencies": {
+      "jsx": "github:floatdrop/plugin-jsx@^0.1.1",
+      "react": "npm:react@^0.12.2"
+    }
+  },
+  "devDependencies": {
+    "jspm": "^0.14.0"
+  }
+}
