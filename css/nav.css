@@ -1,6 +1,7 @@
 .navCtr {
   display: table-cell;
   background: #fffef8;
+  position: relative;
 }
 
 .navCtr nav {
@@ -8,8 +9,89 @@
   min-height: 300px;
   margin-right: 10px;
   box-shadow: 5px 0px 5px 0px rgba(50, 50, 50, 0.5);
+  overflow-x: hidden;
+  position: relative;
+  transition: width .2s;
 }
 
 .navCtr nav * {
   margin: 0;
 }
+
+.navCtr nav.collapsed {
+  width: 2.5rem;
+}
+
+.expCtrl {
+  text-align: right;
+  padding: .25rem .5rem .25rem 0;
+}
+
+.navCtr nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navCtr nav > ul {
+  position: relative;
+  left: 0;
+  transition: left .2s;
+}
+
+.navCtr nav.collapsed > ul {
+  left: -11.5rem;
+}
+
+.navCtr nav li {
+  line-height: 2rem;
+}
+
+.navCtr nav li div {
+  padding-left: 1rem;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap;
+  border-left: 4px solid white;
+}
+
+.navCtr nav li div.selected {
+  border-left: 4px solid green;
+}
+
+.navCtr nav > ul >li:last-child div {
+  border-bottom-width: 0;
+}
+
+.navCtr nav li li div {
+  padding-left: 2rem;
+}
+
+.navCtr nav li li li div {
+  padding-left: 3rem;
+}
+
+
+.navCtr nav li div > span.gc {
+  float: right;
+  padding-right: .5rem;
+  cursor: pointer;
+  color: orange;
+}
+
+.navCtr nav li > ul {
+  max-height: 300px;
+  transition: max-height: .8s;
+  overflow-y: hidden;
+}
+
+.navCtr nav li.collapsed > ul {
+  transition: max-height: .8s;
+  max-height: 0;
+}
+
+.clickableItem {
+  cursor: pointer;
+  color: darkblue;
+}
+
+

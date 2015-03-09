@@ -16,3 +16,15 @@ main > *:first-child {
   margin-top: 0;
 }
 
+[role="banner"] {
+  height: 60px;
+  background: #fff8f8;
+  font-size: 130%;
+  line-height: 60px;
+  margin-bottom: 10px;
+}
+
+[role="banner"] * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
