@@ -1,0 +1,15 @@
+.navCtr {
+  display: table-cell;
+  background: #fffef8;
+}
+
+.navCtr nav {
+  width: 14rem;
+  min-height: 300px;
+  margin-right: 10px;
+  box-shadow: 5px 0px 5px 0px rgba(50, 50, 50, 0.5);
+}
+
+.navCtr nav * {
+  margin: 0;
+}
