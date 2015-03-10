@@ -11,6 +11,7 @@
   box-shadow: 5px 0px 5px 0px rgba(50, 50, 50, 0.5);
   overflow-x: hidden;
   position: relative;
+  background: white;
   transition: width .2s;
 }
 
@@ -20,6 +21,18 @@
 
 .navCtr nav.collapsed {
   width: 2.5rem;
+}
+
+@media (max-width: 600px) {
+  .navCtr {
+    width: 2.5rem;
+    min-height: 300px;
+    overflow-x: visible;
+  }
+
+  .navCtr nav {
+    position: absolute;
+  }
 }
 
 .expCtrl {
