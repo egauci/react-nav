@@ -11,3 +11,5 @@ To run:
 4. npm install
 5. jspm install
 6. Navigate to index.html in your browser
+
+Tested in current Chrome, Safari, and FireFox.
