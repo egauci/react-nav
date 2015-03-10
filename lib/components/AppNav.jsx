@@ -2,11 +2,12 @@
 
 import React from 'react/addons';
 
-let prevSel = null;
-
 let NavList = React.createClass({
   propTypes: {
     label: React.PropTypes.string.isRequired,
+    selChanged: React.PropTypes.function.isRequired,
+    id: React.PropTypes.function.isRequired,
+    selId: React.PropTypes.function.isRequired,
     children: React.PropTypes.arrayOf(React.PropTypes.object),
     expanded: React.PropTypes.bool
   },
@@ -14,31 +15,19 @@ let NavList = React.createClass({
     return {
       expanded: true,
       children: [],
-      selected: false
+      selItem: ''
     }
   },
   getInitialState() {
     return {
-      expanded: this.props.expanded,
-      selected: prevSel ? false : this.props.selected
+      expanded: this.props.expanded
     };
   },
   handleExpClick() {
     this.setState({expanded: !this.state.expanded});
   },
   handleItemClick(e) {
-    if (!this.state.selected) {
-      if (prevSel) {
-        prevSel.setState({selected: false});
-      }
-      prevSel = this;
-    }
-    this.setState({selected: !this.state.selected});
-  },
-  componentDidMount() {
-    if (this.state.selected) {
-      prevSel = this;
-    }
+    this.props.selChanged(this.props.id);
   },
   render() {
     if (this.props.children.length > 0) {
@@ -53,14 +42,16 @@ let NavList = React.createClass({
           </div>
           <ul>
             {this.props.children.map(function(itm) {
-              return <NavList label={itm.label} children={itm.children} selected={itm.selected} />
+              return <NavList label={itm.label} children={itm.children} id={itm.id} selItem={this.props.selItem} selChanged={this.props.selChanged} />
             })}
           </ul>
         </li>
       );
     } else {
       let divCls = 'clickableItem';
-      divCls += this.state.selected ? ' selected' : '';
+      if (this.id === this.props.selItem) {
+        divCls += ' selected';
+      }
       return (
         <li><div className={divCls} onClick={this.handleItemClick}>{this.props.label}</div></li>
       );
@@ -71,7 +62,8 @@ let NavList = React.createClass({
 export default React.createClass({
   propTypes: {
     expanded: React.PropTypes.bool,
-    nodes: React.PropTypes.arrayOf(React.PropTypes.object).isRequired
+    mdata: React.PropTypes.object.isRequired,
+    selChanged: React.PropTypes.function.isRequired
   },
   getDefaultProps() {
     return {
@@ -94,8 +86,8 @@ export default React.createClass({
         <i className={btnCls} onClick={this.handleClick}></i>
       </div>
       <ul>
-      {this.props.nodes.map(function(itm) {
-        return <NavList label={itm.label} children={itm.children} selected={itm.selected} />
+      {this.props.mdata.nodes.map(function(itm) {
+        return <NavList label={itm.label} children={itm.children} id={itm.id} selItem={this.props.mdata.selItem} selChanged={this.props.selChanged} />
       })}
       </ul>
     </nav>
