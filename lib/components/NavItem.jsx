@@ -28,22 +28,23 @@ let NavItem = React.createClass({
   handleExpClick() { // toggle expanded
     this.setState({expanded: !this.state.expanded});
   },
-  handleItemClick(e) {
+  handleItemClick() { // item selected, invoke callback
     this.props.selChanged(this.props.id);
   },
   render() {
     if (this.props.children.length > 0) {
       // this item has children, render it as a group
       let btnCls = this.state.expanded ? 'fa fa-chevron-up' : 'fa fa-chevron-up fa-rotate-180';
+      let btnTitle = this.state.expanded ? 'Collapse' : 'Expand';
       return (
         <li className={this.state.expanded ? '' : 'collapsed'}>
           <div>
-            {this.props.label}
-            <span className={this.state.expanded ? 'gc' : 'gc collapsed'} onClick={this.handleExpClick}>
+            <span className="gc" onClick={this.handleExpClick} title={btnTitle}>
               <i className={btnCls}></i>
             </span>
+            {this.props.label}
           </div>
-          {/* now instantiate the children */}
+          {/* now process the children */}
           <ul>
             {this.props.children.map(function(itm) {
               return <NavItem label={itm.label} children={itm.children}

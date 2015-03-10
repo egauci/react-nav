@@ -40,6 +40,10 @@
   padding: .25rem .5rem .25rem 0;
 }
 
+.expCtrl i {
+  cursor: pointer;
+}
+
 .navCtr nav ul {
   list-style-type: none;
   padding: 0;
