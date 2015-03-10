@@ -11,7 +11,7 @@ System.config({
 System.config({
   "map": {
     "jsx": "github:floatdrop/plugin-jsx@0.1.1",
-    "react": "npm:react@0.12.2",
+    "react": "npm:react@0.13.0",
     "github:floatdrop/plugin-jsx@0.1.1": {
       "react-tools": "npm:react-tools@0.12.2"
     },
@@ -19,7 +19,7 @@ System.config({
       "assert": "npm:assert@1.3.0"
     },
     "github:jspm/nodelibs-buffer@0.1.0": {
-      "buffer": "npm:buffer@3.0.3"
+      "buffer": "npm:buffer@3.1.0"
     },
     "github:jspm/nodelibs-constants@0.1.0": {
       "constants-browserify": "npm:constants-browserify@0.0.1"
@@ -31,6 +31,14 @@ System.config({
       "events-browserify": "npm:events-browserify@0.0.1"
     },
     "github:jspm/nodelibs-http@1.7.0": {
+      "Base64": "npm:Base64@0.2.1",
+      "events": "github:jspm/nodelibs-events@0.1.0",
+      "inherits": "npm:inherits@2.0.1",
+      "stream": "github:jspm/nodelibs-stream@0.1.0",
+      "url": "github:jspm/nodelibs-url@0.1.0",
+      "util": "github:jspm/nodelibs-util@0.1.0"
+    },
+    "github:jspm/nodelibs-http@1.7.1": {
       "Base64": "npm:Base64@0.2.1",
       "events": "github:jspm/nodelibs-events@0.1.0",
       "inherits": "npm:inherits@2.0.1",
@@ -116,6 +124,11 @@ System.config({
       "stream": "github:jspm/nodelibs-stream@0.1.0"
     },
     "npm:buffer@3.0.3": {
+      "base64-js": "npm:base64-js@0.0.8",
+      "ieee754": "npm:ieee754@1.1.4",
+      "is-array": "npm:is-array@1.0.1"
+    },
+    "npm:buffer@3.1.0": {
       "base64-js": "npm:base64-js@0.0.8",
       "ieee754": "npm:ieee754@1.1.4",
       "is-array": "npm:is-array@1.0.1"
@@ -359,6 +372,11 @@ System.config({
       "envify": "npm:envify@3.3.0",
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
+    "npm:react@0.13.0": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "envify": "npm:envify@3.3.0",
+      "process": "github:jspm/nodelibs-process@0.1.1"
+    },
     "npm:readable-stream@1.1.13": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "core-util-is": "npm:core-util-is@1.0.1",
@@ -390,7 +408,7 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:sigmund@1.0.0": {
-      "http": "github:jspm/nodelibs-http@1.7.0",
+      "http": "github:jspm/nodelibs-http@1.7.1",
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
     "npm:source-map@0.1.31": {
