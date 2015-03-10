@@ -80,12 +80,12 @@
 
 .navCtr nav li > ul {
   max-height: 300px;
-  transition: max-height: .8s;
+  transition: max-height .3s;
   overflow-y: hidden;
 }
 
 .navCtr nav li.collapsed > ul {
-  transition: max-height: .8s;
+  transition: max-height .3s;
   max-height: 0;
 }
 

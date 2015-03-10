@@ -1,13 +1,15 @@
 'use strict';
 
-import React from 'react/addons';
+import React from 'react';
 
-let NavList = React.createClass({
+// NavItem is an item in the menu. It instantiates its
+// children if it has any.
+let NavItem = React.createClass({
   propTypes: {
     label: React.PropTypes.string.isRequired,
-    selChanged: React.PropTypes.function.isRequired,
-    id: React.PropTypes.function.isRequired,
-    selId: React.PropTypes.function.isRequired,
+    selChanged: React.PropTypes.func.isRequired,
+    id: React.PropTypes.string.isRequired,
+    selId: React.PropTypes.string.isRequired,
     children: React.PropTypes.arrayOf(React.PropTypes.object),
     expanded: React.PropTypes.bool
   },
@@ -15,7 +17,7 @@ let NavList = React.createClass({
     return {
       expanded: true,
       children: [],
-      selItem: ''
+      selId: ''
     }
   },
   getInitialState() {
@@ -23,7 +25,7 @@ let NavList = React.createClass({
       expanded: this.props.expanded
     };
   },
-  handleExpClick() {
+  handleExpClick() { // toggle expanded
     this.setState({expanded: !this.state.expanded});
   },
   handleItemClick(e) {
@@ -31,6 +33,7 @@ let NavList = React.createClass({
   },
   render() {
     if (this.props.children.length > 0) {
+      // this item has children, render it as a group
       let btnCls = this.state.expanded ? 'fa fa-chevron-up' : 'fa fa-chevron-up fa-rotate-180';
       return (
         <li className={this.state.expanded ? '' : 'collapsed'}>
@@ -40,16 +43,18 @@ let NavList = React.createClass({
               <i className={btnCls}></i>
             </span>
           </div>
+          {/* now instantiate the children */}
           <ul>
             {this.props.children.map(function(itm) {
-              return <NavList label={itm.label} children={itm.children} id={itm.id} selItem={this.props.selItem} selChanged={this.props.selChanged} />
-            })}
+              return <NavItem label={itm.label} children={itm.children} key={itm.id} id={itm.id} selId={this.props.selId} selChanged={this.props.selChanged} />
+            }, this)}
           </ul>
         </li>
       );
     } else {
+      // this item has no children. It is a clickable leaf item
       let divCls = 'clickableItem';
-      if (this.id === this.props.selItem) {
+      if (this.props.id === this.props.selId) {
         divCls += ' selected';
       }
       return (
@@ -59,11 +64,12 @@ let NavList = React.createClass({
   }
 });
 
+// the exported class is the AppNav
 export default React.createClass({
   propTypes: {
-    expanded: React.PropTypes.bool,
-    mdata: React.PropTypes.object.isRequired,
-    selChanged: React.PropTypes.function.isRequired
+    expanded: React.PropTypes.bool,     // initial state
+    mdata: React.PropTypes.object.isRequired, // selection and nodes
+    selChanged: React.PropTypes.func.isRequired // callback for selection change
   },
   getDefaultProps() {
     return {
@@ -79,16 +85,23 @@ export default React.createClass({
     this.setState({expanded: !this.state.expanded});
   },
   render() {
-    let btnCls = this.state.expanded ? "fa fa-hand-o-left fa-border" : "fa-flip-horizontal fa fa-hand-o-left fa-border";
+    let btnCls, btnTitle;
+    if (this.state.expanded) {
+      btnCls = 'fa fa-hand-o-left fa-border';
+      btnTitle = 'Collapse'
+    } else {
+      btnCls = 'fa-flip-horizontal fa fa-hand-o-left fa-border';
+      btnTitle = 'Expand'
+    }
     return (
     <nav className={this.state.expanded ? '' : 'collapsed'}>
-      <div className="expCtrl">
+      <div className="expCtrl" role="button" title={btnTitle}>
         <i className={btnCls} onClick={this.handleClick}></i>
       </div>
       <ul>
       {this.props.mdata.nodes.map(function(itm) {
-        return <NavList label={itm.label} children={itm.children} id={itm.id} selItem={this.props.mdata.selItem} selChanged={this.props.selChanged} />
-      })}
+        return <NavItem label={itm.label} children={itm.children} key={itm.id} id={itm.id} selId={this.props.mdata.selId} selChanged={this.props.selChanged} />
+      }, this)}
       </ul>
     </nav>
     );

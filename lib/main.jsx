@@ -6,9 +6,13 @@ import data from './data';
 
 var appNav;
 
+// selChanged is called by clicked items to indicate new selection.
+// Send it back to appNav in prop
 function selChanged(selId) {
   data.selId = selId;
   appNav.setProps({mdata: data});
 }
 
-appNav = React.render(<AppNav expanded={true} mdata={data} selChanged={selChanged} />, document.getElementById('navCtr'));
+appNav = React.render(
+  <AppNav expanded={true} mdata={data} selChanged={selChanged} />,
+  document.getElementById('navCtr'));
