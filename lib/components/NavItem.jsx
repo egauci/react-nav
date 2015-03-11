@@ -4,33 +4,22 @@ import React from 'react';
 
 // NavItem is an item in the menu. It instantiates its
 // children if it has any.
-let NavItem = React.createClass({
-  propTypes: {
-    label: React.PropTypes.string.isRequired,
-    selChanged: React.PropTypes.func.isRequired,
-    id: React.PropTypes.string.isRequired,
-    selId: React.PropTypes.string.isRequired,
-    children: React.PropTypes.arrayOf(React.PropTypes.object),
-    expanded: React.PropTypes.bool
-  },
-  getDefaultProps() {
-    return {
-      expanded: true,
-      children: [],
-      selId: ''
-    }
-  },
-  getInitialState() {
-    return {
+
+// This component uses ES6 class syntax and requires React >= 0.13.0
+
+class NavItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       expanded: this.props.expanded
     };
-  },
+  }
   handleExpClick() { // toggle expanded
     this.setState({expanded: !this.state.expanded});
-  },
+  }
   handleItemClick() { // item selected, invoke callback
     this.props.selChanged(this.props.id);
-  },
+  }
   render() {
     if (this.props.children.length > 0) {
       // this item has children, render it as a group
@@ -39,7 +28,7 @@ let NavItem = React.createClass({
       return (
         <li className={this.state.expanded ? '' : 'collapsed'}>
           <div>
-            <span className="gc" onClick={this.handleExpClick} title={btnTitle}>
+            <span className="gc" onClick={this.handleExpClick.bind(this)} title={btnTitle}>
               <i className={btnCls}></i>
             </span>
             {this.props.label}
@@ -49,7 +38,7 @@ let NavItem = React.createClass({
             {this.props.children.map(function(itm) {
               return <NavItem label={itm.label} children={itm.children}
               key={itm.id} id={itm.id} selId={this.props.selId}
-              selChanged={this.props.selChanged} />
+              selChanged={this.props.selChanged.bind(this)} />
             }, this)}
           </ul>
         </li>
@@ -61,10 +50,24 @@ let NavItem = React.createClass({
         divCls += ' selected';
       }
       return (
-        <li><div className={divCls} onClick={this.handleItemClick}>{this.props.label}</div></li>
+        <li><div className={divCls} onClick={this.handleItemClick.bind(this)}>{this.props.label}</div></li>
       );
     }
   }
-});
+}
+
+NavItem.propTypes = {
+  label: React.PropTypes.string.isRequired,
+  selChanged: React.PropTypes.func.isRequired,
+  id: React.PropTypes.string.isRequired,
+  selId: React.PropTypes.string.isRequired,
+  children: React.PropTypes.arrayOf(React.PropTypes.object),
+  expanded: React.PropTypes.bool
+};
+NavItem.defaultProps = {
+  expanded: true,
+  children: [],
+  selId: ''
+};
 
 export default NavItem;
