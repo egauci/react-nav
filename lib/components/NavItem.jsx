@@ -35,11 +35,11 @@ class NavItem extends React.Component {
           </div>
           {/* now process the children */}
           <ul>
-            {this.props.children.map(function(itm) {
+            {this.props.children.map((itm) => {
               return <NavItem label={itm.label} children={itm.children}
               key={itm.id} id={itm.id} selId={this.props.selId}
               selChanged={this.props.selChanged.bind(this)} />
-            }, this)}
+            })}
           </ul>
         </li>
       );

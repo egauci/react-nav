@@ -27,10 +27,10 @@ let AppNav = React.createClass({
     let btnCls, btnTitle;
     if (this.state.expanded) {
       btnCls = 'fa fa-hand-o-left fa-border';
-      btnTitle = 'Hide'
+      btnTitle = 'Hide';
     } else {
       btnCls = 'fa-flip-horizontal fa fa-hand-o-left fa-border';
-      btnTitle = 'Show'
+      btnTitle = 'Show';
     }
     return (
     <nav className={this.state.expanded ? '' : 'collapsed'}>
